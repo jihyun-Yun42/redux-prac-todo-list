@@ -38,10 +38,10 @@ export const editBtn = (id) => {
   };
 };
 const initialState = [
-  { id: 1, title: '리덕스', content: 'ㅈ밥', done: false },
-  { id: 2, title: '조지자', content: '리덕수', done: false },
-  { id: 3, title: '지현아', content: '뽜이팅', done: true },
-  { id: 4, title: '퇴근', content: '하고싶다', done: true },
+  { id: 1, title: '리덕스배우기', content: 'Lv2과제 마무리 하기', done: false },
+  { id: 2, title: 'Lv3 과제', content: 'styled-components 적용해보기', done: false },
+  { id: 3, title: '라우터', content: '벨로그에 정리하기', done: true },
+  { id: 4, title: '동기, 비동기', content: '벨로그에 정리하기 22', done: true },
 ];
 const todo = (state = initialState, action) => {
   switch (action.type) {

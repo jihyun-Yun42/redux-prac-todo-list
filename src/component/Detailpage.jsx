@@ -13,7 +13,7 @@ function Detailpage() {
   return (
     <header>
       <h1>{foundData.title}</h1>
-      qqzzzzzzzzz
+      <p>{foundData.content}</p>
     </header>
   );
 }

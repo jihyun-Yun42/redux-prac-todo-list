@@ -6,7 +6,7 @@ function Home() {
     <div>
       <TodoCreate />
       <TodoBody children="working" done={false} />
-      <TodoBody children="done" done={true} />
+      <TodoBody children="done" done />
     </div>
   );
 }
