@@ -2,13 +2,11 @@ const WORKING = 'todo/working';
 const DELETE = 'todo/delete';
 const TODO = 'todo/title';
 const EDIT = 'todo/edit';
-const EDIT_BTN = 'todo/editBtn';
 
-export const addTitle = (title, content) => {
+export const addTitle = (payload) => {
   return {
     type: TODO,
-    title,
-    content,
+    payload,
   };
 };
 export const workingDone = (payload) => {
@@ -23,20 +21,13 @@ export const todoDelete = (payload) => {
     payload,
   };
 };
-export const todoEdit = (editTitle, editContent, id) => {
+export const todoEdit = (payload) => {
   return {
     type: EDIT,
-    editTitle,
-    editContent,
-    id,
+    payload,
   };
 };
-export const editBtn = (id) => {
-  return {
-    type: EDIT_BTN,
-    id,
-  };
-};
+
 const initialState = [
   { id: 1, title: '리덕스배우기', content: 'Lv2과제 마무리 하기', done: false },
   { id: 2, title: 'Lv3 과제', content: 'styled-components 적용해보기', done: false },
@@ -50,8 +41,8 @@ const todo = (state = initialState, action) => {
         ...state,
         {
           id: state[state.length - 1].id + 1,
-          title: action.title,
-          content: action.content,
+          title: action.payload.title,
+          content: action.payload.content,
           done: false,
         },
       ];
@@ -63,11 +54,11 @@ const todo = (state = initialState, action) => {
       return state.filter((item) => item.id !== action.payload);
     case EDIT:
       return state.map((item) =>
-        item.id === action.id
+        item.id === action.payload.id
           ? {
               ...item,
-              title: action.editTitle,
-              content: action.editContent,
+              title: action.payload.title,
+              content: action.payload.content,
             }
           : item
       );

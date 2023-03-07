@@ -7,8 +7,21 @@ function Edit({ item }) {
   const dispatch = useDispatch();
 
   const [edit, setEdit] = useState(false);
-  const [editTitle, setEditTitle] = useState(item.title);
-  const [editContent, setEditContent] = useState(item.content);
+  const [editTodo, setEditTodo] = useState({
+    title: item.title,
+    content: item.content,
+  });
+
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setEditTodo((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddEdit = () => {
+    const id = item.id;
+    dispatch(todoEdit({ ...editTodo, id }));
+    setEdit(!edit);
+  };
 
   return (
     <div>
@@ -16,13 +29,15 @@ function Edit({ item }) {
         <div>
           <input
             type="text"
-            value={editTitle}
-            onChange={(event) => setEditTitle(event.target.value)}
+            name="title"
+            value={editTodo.title}
+            onChange={inputHandler}
           />
           <input
             type="text"
-            value={editContent}
-            onChange={(event) => setEditContent(event.target.value)}
+            name="content"
+            value={editTodo.content}
+            onChange={inputHandler}
           />
         </div>
       ) : (
@@ -37,14 +52,7 @@ function Edit({ item }) {
           <button onClick={() => dispatch(todoDelete(item.id))}>삭제</button>
         </div>
       )}
-      <button
-        onClick={() => {
-          dispatch(todoEdit(editTitle, editContent, item.id));
-          setEdit(!edit);
-        }}
-      >
-        {edit ? '수정완료' : '수정'}
-      </button>
+      <button onClick={handleAddEdit}>{edit ? '수정완료' : '수정'}</button>
     </div>
   );
 }
